@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  <form action="/login" method="post">
+  <input type="text" name="username" value="username"></input>
+  <input type="text" name="password" value="password"></input>
+  <button type="submit"> Login</button>
+  </form>
