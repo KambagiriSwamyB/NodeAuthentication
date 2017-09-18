@@ -33,7 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'keyboardcat',
   store: new FirebaseStore({
-    database: ref.database()
+    database: ref.database(),
+    reapInterval: 600000
   }),
   resave: false,
   saveUninitialized: true,

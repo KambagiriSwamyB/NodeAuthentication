@@ -1,4 +1,6 @@
 var express = require('express');
+var emailhandler = require('../handlers/email-handler');
+var isAuthenticated = require('../middlewares/auth');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 const firebase = require('firebase-admin');
@@ -34,13 +36,14 @@ router.get('/logout', function (req, res) {
 
 })
 
-router.get('/securedpage', function (req, res) {
+router.get('/securedpage', isAuthenticated, function (req, res) {
   console.log(req.session);
-  if (!req.session.user) {
-    res.status(401).send();
-  } else {
-    res.status(200).send('you got access!');
-  }
+  res.status(200).send('you got access!');
+
+})
+
+router.post('/sendmail', isAuthenticated, (req, res) => {
+  emailhandler(req, res)
 })
 
 
