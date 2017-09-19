@@ -1,5 +1,6 @@
 var express = require('express');
 var emailhandler = require('../handlers/email-handler');
+var videohandler = require('../handlers/video-handler');
 var isAuthenticated = require('../middlewares/auth');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
@@ -45,6 +46,11 @@ router.get('/securedpage', isAuthenticated, function (req, res) {
 router.post('/sendmail', isAuthenticated, (req, res) => {
   emailhandler(req, res)
 })
+
+router.get('/video', isAuthenticated, function (req, res) {
+  videohandler(req, res);
+})
+
 
 
 module.exports = router;
